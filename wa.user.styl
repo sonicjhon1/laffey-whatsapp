@@ -1,12 +1,12 @@
 /* ==UserStyle==
-@name         Dark-WhatsApp
-@description  Dark and light, very customizable theme for WhatsApp.
+@name         Leffey-WhatsApp
+@description  Laffey theme for WhatsApp, made with the help of dark-whatsapp.
 @namespace    github.com/vednoc/dark-whatsapp
 @homepageURL  https://github.com/vednoc/dark-whatsapp
 @supportURL   https://github.com/vednoc/dark-whatsapp/issues
 @updateURL    https://raw.githubusercontent.com/vednoc/dark-whatsapp/master/wa.user.styl
 @author       vednoc <vednoc@pm.me> (https://github.com/vednoc)
-@version      3.1.0
+@version      1.0.0
 @license      MIT
 @preprocessor stylus
 
@@ -16,16 +16,16 @@
     'Dark gray (new)  ': 'new',
 }
 
-@var color    _bg        'Base background color        ' #1f232a
+@var color    _bg        'Base background color        ' #1f232a75
 @var color    _fg        'Base foreground color        ' #eeeeee
-@var color    _ac        'Base accent color            ' #7289da
+@var color    _ac        'Base accent color            ' #7289da90
 @var range    _bg_a      'Adjust background color tones' [0, -25, 25, 0.1, '%']
 @var range    _fg_a      'Adjust foreground color tones' [0, -25, 25, 0.1, '%']
 @var range    _ac_a      'Adjust accent color tones    ' [0,   0, 25,   1, '%']
 @var range    _sc_a      'Adjust syntax color tones    ' [0,   0, 25,   1, '%']
 
 @var text     ui_font    'UI font' ''font_name''
-@var text     app_width  'App width' 1396px
+@var text     app_width  'App width' 80%
 @var checkbox fullscreen 'Fullscreen mode' 0
 
 @var checkbox compact    'Compact mode' 1
@@ -45,16 +45,16 @@
 @var range    radius_a   'Rounded corners for avatars' [50, 0, 50, 1, '%']
 
 @var select   app_image  'App background' {
-    'Theme image with 12px blur   *': 'bg-high ',
+    'Theme image with 12px blur    ': 'bg-high ',
     'Theme image with 6px blur     ': 'bg-low  ',
     'Theme image without blur      ': 'bg-none ',
-    'Custom background image       ': 'custom  ',
+    'Custom background image      *': 'custom  ',
     'Default background            ': 'default ',
     'None                          ': 'none    ',
 }
-@var text     image_url  'App background image link' url('https://images.unsplash.com/photo-1434569117012-ce134ee1a088?fit=crop&w=1280&h=720&q=80')
-@var range    bg_opacity 'App background image opacity' [0.4, 0.0, 1, 0.01]
-@var range    bg_blur    'App background image blur size' [0, 0, 50, 1, 'px']
+@var text     image_url  'App background image link' url('https://images.alphacoders.com/965/965894.jpg')
+@var range    bg_opacity 'App background image opacity' [0.65, 0.0, 1, 0.01]
+@var range    bg_blur    'App background image blur size' [4, 0, 50, 1, 'px']
 @var range    bg_hue     'App background image hue' [320, 0, 360, 1, 'deg']
 @var range    bg_invert  'App background image invert colors' [0, 0.0, 1, 0.01]
 @var text     bg_size    'App background image size' cover
@@ -62,8 +62,8 @@
 @var text     bg_rep     'App background image repeat' no-repeat
 
 @var select   tail_style 'Style for message bubble tails' {
-    'Default  *': 'default ',
-    'Minimal   ': 'minimal ',
+    'Default   ': 'default ',
+    'Minimal  *': 'minimal ',
     'Rounded   ': 'rounded ',
     'Facebook  ': 'fb-like ',
 }
@@ -78,11 +78,11 @@
 }
 @var checkbox emoji_ani  'Animate emojis' 1
 
-@var checkbox ow_imsg    'Override incoming message bubble color' 0
-@var color    _imsg  'Incoming message bubble color' #16191e
+@var checkbox ow_imsg    'Override incoming message bubble color' 1
+@var color    _imsg  'Incoming message bubble color' #5c2f6480
 @var checkbox bubble_in  'Swap sides for incoming message bubbles' 0
-@var checkbox ow_omsg    'Override outgoing message bubble color' 0
-@var color    _omsg  'Outgoing message bubble color' #3b4250
+@var checkbox ow_omsg    'Override outgoing message bubble color' 1
+@var color    _omsg  'Outgoing message bubble color' #3b425095
 @var checkbox bubble_out 'Swap sides for outgoing message bubbles' 0
 
 @var checkbox rtl_header 'RTL: Remove empty message header' 1
@@ -94,11 +94,11 @@
 @var text     chat_b_out 'Blurred media hover-off delay' 0.2s
 
 @var checkbox chat_bg    'Chat background image' 1
-@var text     chat_image 'Chat background image link' url('https://web.whatsapp.com/img/bg-chat-tile_9e8a2898faedb7db9bf5638405cf81ae.png')
+@var text     chat_image 'Chat background image link' url('https://static.zerochan.net/Azur.Lane.full.2242794.jpg')
 @var range    chat_bg_o  'Chat background image opacity' [0.15, 0.0, 1, 0.01]
-@var range    chat_bg_iv 'Chat background image inverted colors' [0.6, 0.0, 1, 0.01]
-@var text     chat_bg_s  'Chat background image size' initial
-@var text     chat_bg_p  'Chat background image position' top left
+@var range    chat_bg_iv 'Chat background image inverted colors' [0.0, 0.0, 1, 0.01]
+@var text     chat_bg_s  'Chat background image size' 118%
+@var text     chat_bg_p  'Chat background image position' center
 @var text     chat_bg_r  'Chat background image repeat' repeat
 
 @var color    _red       'Base red color              ' #f07178
@@ -110,7 +110,7 @@
 @var color    _magenta   'Base magenta color          ' #c792ea
 @var color    _violet    'Base violet color           ' #9a91ea
 @var color    _white     'White color                 ' #ffffff
-@var color    _sh        'Shadow color                ' #00000025
+@var color    _sh        'Shadow color                ' #00000040
 ==/UserStyle== */
 
 // Color mixin.
@@ -344,13 +344,10 @@ OM = _omsg
 @-moz-document domain('web.whatsapp.com') {
     :root:not(#z), .dark:not(#z) {
         /// Userstyle info and announcements.
-        --version: 'Dark-WhatsApp 3.1.0 — October 2nd, 2020'
-        --message: 'The v3 is here! 🎉 I wrote a blog post about it here: ' + \
-                   'https://vednoc.me/blog/next-gen-of-dark-whatsapp \A\A' + \
-                   'I started working on an alternative to USo, currently' + \
-                   ' in very early stages: https://userstyles.world 👀  \A\A' + \
-                   'Read more about v3, as always, in the project changelog:'
-        --changes: '\A https://github.com/vednoc/dark-whatsapp\A\A\A' + \
+        --version: 'Laffey-WhatsApp 1.0.0 — October 10th, 2020'
+        --message: 'Laffey Themed WhatsApp Web! \A\A\A' + \
+                   'Theme by SonicJ'
+        --changes: '\A\A\A' + \
                    'P.S. CSS can not add links, only fake/pseudo text.'
 
         /// UI font.

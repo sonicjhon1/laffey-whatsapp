@@ -24,6 +24,9 @@ For userstyle managers other than Stylus or a custom-compiled version, see
 If you have a question, make sure to see [[https://github.com/vednoc/dark-whatsapp/wiki/FAQ][FAQ page]] first in order to see if your
 question has already been answered.
 
+** Support Me
+You can subcribe to [[https://www.youtube.com/channel/UCyaSbQWYe3FRRRUIB9VNfew][My Youtube channel]] if you liked this theme.
+
 ** Credits
 This project wouldn't be possible without:
 - [[https://github.com/vednoc/dark-whatsapp][Dark-Whatsapp]] for making the initial script that I customized.

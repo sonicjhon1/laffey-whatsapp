@@ -25,7 +25,7 @@ If you have a question, make sure to see [[https://github.com/vednoc/dark-whatsa
 question has already been answered.
 
 ** Support Me
-You can subcribe to [[https://www.youtube.com/channel/UCyaSbQWYe3FRRRUIB9VNfew][My Youtube channel]] if you liked this theme.
+You can subscribe to [[https://www.youtube.com/channel/UCyaSbQWYe3FRRRUIB9VNfew][My Youtube channel]] if you liked this theme.
 
 ** Credits
 This project wouldn't be possible without:

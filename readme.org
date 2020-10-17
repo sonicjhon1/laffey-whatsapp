@@ -14,10 +14,12 @@ Visit [[https://github.com/vednoc/dark-whatsapp/wiki/Configuration][configuratio
 ** Installation
 You have to install [[https://add0n.com/stylus.html][Stylus]] and then click on the install link below.
 
-Without embedded B64 images (Theme may load slower)
+Without embedded B64 theme (Theme may load slower depending on your internet connection)
+
 [[https://raw.githubusercontent.com/sonicjhon1/laffey-whatsapp/master/wa.user.styl][https://img.shields.io/badge/Install%20directly%20with-Stylus-116b59.svg]] 
 
-With embedded B64 images (Theme will load faster)
+With embedded B64 theme (Theme will load faster because theme's images are saved locally)
+
 [[https://raw.githubusercontent.com/sonicjhon1/laffey-whatsapp/master/B64wa.user.styl][https://img.shields.io/badge/Install%20directly%20with-Stylus-116b59.svg]] 
 
 *** Other ways to install this userstyle

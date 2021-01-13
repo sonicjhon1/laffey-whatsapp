@@ -1,6 +1,89 @@
 #+STARTUP: nofold
 
 * Changelog
+** 3.5.0 [2020-12-10 Thu]
+Adding one new option and updating selectors for ~2.2049.8~ update.
+
+*** Added
+ - Profile pictures can now be hidden with a new option ([[https://github.com/vednoc/dark-whatsapp/issues/183][#183]])
+   + Disabled by default.
+   + Quick preview:
+
+     [[https://user-images.githubusercontent.com/18245694/101796690-7ba3aa00-3b09-11eb-9e4e-115fec492f54.png]]
+
+*** Fixed
+- Resolved a conflict with hover state of items in forward message modal
+- Updated selector for external links when Facebook-style tails are enabled
+
+** 3.4.0 [2020-11-21 Sat]
+Hotfix release for ~2.2047.11~ update.
+
+*** Docs
+- Added summary for =v3.3.0= release
+- Revised code comments
+
+*** Improvements
+- Compact mode and Facebook-style tails should work slightly better than before
+  + These two options were the ones that received small yet necessary rewrites.
+- Slowed down custom emoji animations (from =1.0s= to =1.5s=)
+
+*** Fixed
+- Pretty much /everything/
+  + All class selectors had to be replaced with new ones.
+  + Some features had to be slightly rewritten.
+  + A small checklist was made in [[https://github.com/vednoc/dark-whatsapp/issues/182][#182]].
+
+** 3.3.0 [2020-11-01 Sun]
+Adding one new option and tidying up code.
+
+*** Documentation
+- Added preview gif for custom emoji animations in =v3.2.0= release
+
+*** Added
+- New overrides for 'seen message icon color' ([[https://github.com/vednoc/dark-whatsapp/issues/181][#181]])
+  + Works the same way as overrides for message bubble colors.
+  + Quick preview:
+
+    [[https://user-images.githubusercontent.com/18245694/97802421-8a15c080-1c43-11eb-876e-d19c43283538.png]]
+
+*** Fixed
+- Removed =!important= from generated variables
+  + It makes no difference when it's used there.
+
+** 3.2.1 [2020-10-26 Mon]
+Fixing a regression from the previous release.
+
+*** Fixed
+- Updated mismatched keys for 'animate emojis' option
+  + Toggling animated emojis on and off now works as intended.
+
+** 3.2.0 [2020-10-26 Mon]
+Adding options to set custom animated emojis, improving the build tool, adding
+new color variables, and making overall experience more consistent.
+
+*** Build
+- Added an option to print compiled userstyle to standard output
+- Fixed a bug when using =-cuf= options together that would produce an empty file
+- Added checking for file's existance before deleting them for =-r= option
+
+*** Added
+- Two new options to set custom emojis for Kiss and Pulse emoji animations
+  + These bring more customization to 'animated emojis' option.
+  + On detailed how-to-use, see my writeup in the commit [[https://github.com/vednoc/dark-whatsapp/commit/ee200fbd91fc4210e561e8bc7c9189e16a08ff38][#ee200fb]].
+  + Quick preview:
+
+    [[https://user-images.githubusercontent.com/18245694/97813538-23b39100-1c89-11eb-9434-4e45bfd43cea.gif]]
+- More remapping for color variables
+
+*** Improved
+- More color consistency in floating drawers and groups
+- Added better formatting for 'typing...' animation
+
+*** Fixed
+- Removed recently updated =min-height= overflow in compact mode
+- Updated icon color for 'Phone not connected' alert
+- Tweaked new styles for items in wallpapers area
+
 ** 3.1.0 [2020-10-02 Fri]
 Adding one new feature and fixing a few bugs.
 

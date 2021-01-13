@@ -6,7 +6,7 @@
 @supportURL   https://github.com/sonicjhon1/laffey-whatsapp/issues
 @updateURL    https://github.com/sonicjhon1/laffey-whatsapp/master/wa.user.styl
 @author       Sonicjhon1 (https://github.com/sonicjhon1/)
-@version      3.1.1
+@version      3.5.0
 @license      MIT
 @preprocessor stylus
 
@@ -19,6 +19,7 @@
 @var color    _bg        'Base background color        ' #1f232a75
 @var color    _fg        'Base foreground color        ' #eeeeee
 @var color    _ac        'Base accent color            ' #7289da90
+
 @var range    _bg_a      'Adjust background color tones' [0, -25, 25, 0.1, '%']
 @var range    _fg_a      'Adjust foreground color tones' [0, -25, 25, 0.1, '%']
 @var range    _ac_a      'Adjust accent color tones    ' [0,   0, 25,   1, '%']
@@ -76,11 +77,17 @@
     'Normal   ': 'normal  ',
     'Small    ': 'small   ',
 }
-@var checkbox emoji_ani  'Animate emojis' 1
+@var checkbox emoji_a    'Animate emojis' 1
+@var text     emoji_k    'Emojis with kiss animation' "'💋'"
+@var text     emoji_p    'Emojis with pulse animation' "'🤩' '😍' '☺️' '❣️' '♥️' '❤️'"
+
+@var checkbox ow_ack     'Override seen message icon color' 0
+@var color    _ack       'Seen message icon color' #ff6666
 
 @var checkbox ow_imsg    'Override incoming message bubble color' 1
 @var color    _imsg  'Incoming message bubble color' #5c2f6480
 @var checkbox bubble_in  'Swap sides for incoming message bubbles' 0
+
 @var checkbox ow_omsg    'Override outgoing message bubble color' 1
 @var color    _omsg  'Outgoing message bubble color' #3b425095
 @var checkbox bubble_out 'Swap sides for outgoing message bubbles' 0
@@ -88,6 +95,7 @@
 @var checkbox rtl_header 'RTL: Remove empty message header' 1
 @var checkbox rtl_format 'RTL: Fix formatting for message content' 1
 
+@var checkbox chat_h_p_p 'Hide profile pictures' 0
 @var checkbox chat_b_c   'Blurred contacts' 0
 @var checkbox chat_b_img 'Blurred media' 0
 @var text     chat_b_in  'Blurred media hover-on delay' 0.4s
@@ -344,15 +352,18 @@ OM = _omsg
 @-moz-document domain('web.whatsapp.com') {
     :root:not(#z), .dark:not(#z) {
         /// Userstyle info and announcements.
-        --version: 'Laffey-WhatsApp 3.1.1 — October 10th, 2020'
+        --version: 'Laffey-WhatsApp 3.5.0 — January 13th, 2021'
         --message: 'Laffey Themed WhatsApp Web! \A\A\A' + \
                    'Theme by SonicJ'
-        --changes: '\A\A\A' + \
+        --changes: '\A https://github.com/vednoc/dark-whatsapp\A\A\A' + \
                    'P.S. CSS can not add links, only fake/pseudo text.'
+        /// To sync up with line counts.
+        /// To sync up with line counts.
+        /// To sync up with line counts.
 
         /// UI font.
         --ui-font: ui_font, Segoe UI, Helvetica Neue, Helvetica, Lucida Grande,
-                   Arial, Ubuntu, Cantarell, Fira Sans, sans-serif i
+                   Arial, Ubuntu, Cantarell, Fira Sans, sans-serif
 
         /// Rounded corners.
         --r-menus:   radius_m
@@ -416,6 +427,10 @@ OM = _omsg
         --msg-out-1:     (ow_omsg) ? og-1         : var(--ac-5)
         --msg-out-1-rgb: (ow_omsg) ? to_rgb(og-1) : var(--ac-5-rgb)
 
+        /// Override seen message icon color.
+        --msg-ack:     (ow_ack) ? _ack         : var(--ac-0)
+        --msg-ack-rgb: (ow_ack) ? to_rgb(_ack) : var(--ac-0-rgb)
+
         /// WA variables.
         --gray-30: var(--bg-5) //#f7f7f7;
         --gray-30-rgb: var(--bg-5-rgb) //247,247,247;
@@ -433,8 +448,10 @@ OM = _omsg
         --teal-light-rgb: var(--ac-1-rgb) //29,233,182;
         --teal-lighter: var(--ac-2) //#00bfa5;
         --teal-lighter-rgb: var(--ac-2) //0,191,165;
-        --green-deep: var(--ac-3) //#1b9a59;
-        --green-deep-rgb: var(--ac-3-rgb) //27,154,89;
+        --green-deep: var(--ac-2) //#1b9a59;
+        --green-deep-rgb: var(--ac-2-rgb) //27,154,89;
+        --blue-ocean: var(--bg-2) //#aadaff;
+        --blue-ocean-rgb: var(--bg-2-rgb) //#aadaff;
         --active-tab-marker: var(--ac-0) //#00af9c;
         --active-tab-marker-rgb: var(--ac-0-rgb) //0,175,156;
         --app-background-stripe: var(--bg-1) //#091e1f;
@@ -505,8 +522,8 @@ OM = _omsg
         --butterbar-connection-secondary-rgb: var(--fg-4-rgb) //28,40,47;
         --butterbar-default-background: var(--b6-4) //#39c;
         --butterbar-default-background-rgb: var(--b6-4) //51,153,204;
-        --butterbar-icon: var(--b3-2) //#f1f1f2cc;
-        --butterbar-icon-rgb: var(--b3-2-rgb) //241,241,242;
+        --butterbar-icon: var(--b3-0) //#f1f1f2cc;
+        --butterbar-icon-rgb: var(--b3-0-rgb) //241,241,242;
         --butterbar-notification-icon: var(--b6-0) //#8eb2be;
         --butterbar-notification-icon-rgb: var(--b6-0-rgb) //142,178,190;
         --butterbar-primary: var(--fg-0) //#f1f1f2f5;
@@ -557,18 +574,6 @@ OM = _omsg
         --checkbox-background-rgb: var(--ac-0-rgb) //0,175,156;
         --checkbox-mark: var(--white) //#101d24;
         --checkbox-mark-rgb: var(--white-rgb) //16,29,36;
-        /// Old compose variables. TODO: Remove in the next update.
-        --compose-background: var(--bg-1) //#101d24;
-        --compose-background-rgb: var(--bg-1-rgb) //16,29,36;
-        --compose-background-focused: var(--bg-0) //#203946;
-        --compose-background-focused-rgb: var(--bg-0-rgb) //32,57,70;
-        --compose-border: var(--bg-5) //#2f3437;
-        --compose-border-rgb: var(--bg-5-rgb) //47.1,51.86667,54.9;
-        --compose-border-focused: var(--bg-5) //#274656;
-        --compose-border-focused-rgb: var(--bg-5-rgb) //39,70,86;
-        --compose-panel-background: var(--bg-3) //#222e35;
-        --compose-panel-background-rgb: var(--bg-3-rgb) //34,46,53;
-        /// New compose variables.
         --compose-input-background-focused: var(--bg-0) //#3f5560;
         --compose-input-background-focused-rgb: var(--bg-0-rgb) //63,85,96;
         --compose-input-background: var(--bg-1) //#33383b;
@@ -623,8 +628,8 @@ OM = _omsg
         --highlight-rgb: var(--ac-0-rgb) //0,175,156;
         --icon: var(--fg-3) //#80868b;
         --icon-rgb: var(--fg-3-rgb) //128,134,139;
-        --icon-ack: var(--ac-0) //#34b7f1;
-        --icon-ack-rgb: var(--ac-0-rgb) //52,183,241;
+        --icon-ack: var(--msg-ack) //#34b7f1;
+        --icon-ack-rgb: var(--msg-ack-rgb) //52,183,241;
         --icon-disabled: var(--fg-5) //#3c464c;
         --icon-disabled-rgb: var(--fg-5-rgb) //60,70,76;
         --icon-fixed: var(--fg-3) //#80868b;
@@ -649,11 +654,13 @@ OM = _omsg
         --input-placeholder-rgb: var(--fg-4) //106,114,118;
         --intro-background: var(--bg-1) //#222e35;
         --intro-background-rgb: var(--bg-1-rgb) //34,46,53;
-        --intro-border: var(--ac-3) //#054740;
-        --intro-border-rgb: var(--ac-3-rgb) //5,71,64;
+        --intro-border: var(--ac-2) //#054740;
+        --intro-border-rgb: var(--ac-2-rgb) //5,71,64;
+        --intro-logo: var(--fg-3) //rgba(241,241,242,0.26);
+        --intro-logo-rgb: var(--fg-3-rgb) //241,241,242;
         --intro-secondary: var(--fg-3) //#a6a8aa;
         --intro-secondary-rgb: var(--fg-3-rgb) //166,168,170;
-        --inverse: #f1f1f2;
+        --inverse: var(--fg-0) //#f1f1f2;
         --inverse-rgb: var(--fg-0-rgb) //241,241,242;
         --labels-icon: #f1f1f266;
         --labels-icon-rgb: var(--fg-3-rgb) //241,241,242;
@@ -783,7 +790,7 @@ OM = _omsg
         --ptt-green-rgb: var(--b4-rgb) //9,210,97;
         --ptt-message-blue: var(--b6-0) //#68bbe4;
         --ptt-message-blue-rgb: var(--b6-0-rgb) //104,187,228;
-        --quick-action-button: to_rgba('fg-3', 0.5) //#f1f1f280;
+        --quick-action-button: to_rgba('fg-3', 0.8) //#f1f1f280;
         --quick-action-button-rgb: var(--fg-3-rgb) //241,241,242;
         --quick-action-button-background: var(--bg-4) //#080e1299;
         --quick-action-button-background-rgb: var(--bg-4-rgb) //8,14,18;
@@ -815,6 +822,8 @@ OM = _omsg
         --spinner-outgoing-rgb: var(--ac-5-rgb) //76,122,117;
         --startup-background: var(--bg-0) //#131c21;
         --startup-background-rgb: var(--bg-0-rgb) //18.6,28.22,33.4;
+        --startup-icon: var(--fg-3) //#6c7175;
+        --startup-icon-rgb: var(--fg-3-rgb) //108,113,117;
         --status-background: var(--bg-1) //#000;
         --status-background-rgb: var(--bg-1-rgb) //0,0,0;
         --status-background-hover: var(--bg-2) //#242424;
@@ -873,8 +882,12 @@ OM = _omsg
         --voip-reject-background-rgb: 229,75,64;
         --wallpaper-background: var(--bg-1) //#2b93ce;
         --wallpaper-background-rgb: var(--bg-1-rgb) //13.12731,19.91681,23.57269;
-        --win32-title-primary: #fff;
-        --win32-title-primary-rgb: 255,255,255;
+        --wallpaper-thumb-border-active: var(--bg-5) //#75787a;
+        --wallpaper-thumb-border-active-rgb: var(--bg-5-rgb) //117,120,122;
+        --wallpaper-thumb-border-hover: var(--bg-4) //#3b4042;
+        --wallpaper-thumb-border-hover-rgb: var(--bg-4-rgb) //59,63.52941,66;
+        --win32-title-primary: var(--fg-1) //#fff;
+        --win32-title-primary-rgb: var(--fg-1-rgb) //255,255,255;
 
         /// Generate DWA color variables.
         for _v in (bg fg ac b1 b2 b3 b4 b5 b6 b7 b8) {
@@ -884,7 +897,7 @@ OM = _omsg
                 val = _v + \- + _i
 
                 /// Generate CSS variables.
-                { key }: val i
+                { key }: val
                 { key + '-rgb' }: to_rgb(val)
             }
         }
@@ -893,7 +906,7 @@ OM = _omsg
         --white:      _white
         --white-rgb:  to_rgb(_white)
         --sh:         _sh
-        --sh-rgb:     to_rgb(_sh, 1) i
+        --sh-rgb:     to_rgb(_sh, 1)
         --t:          transparent
         --bshadow:    0 4px 8px 2px var(--shadow)
 
@@ -925,20 +938,22 @@ OM = _omsg
     }
 
     // Animation for 'Typing...' indicator.
-    @keyframes pulse {
-        40% { opacity: 0 }
-        80% { opacity: 1 }
+    if (compact_mode) {
+        @keyframes aBorder {
+            40% { opacity: 0 }
+            80% { opacity: 1 }
+        }
     }
 
     // Feat -> Animate emojis.
-    if (emoji_ani) {
-        @keyframes heartPulse {
+    if (emoji_a) {
+        @keyframes aPulse {
           0%   { transform: scale(.9) }
           50%  { transform: scale(1)  }
           100% { transform: scale(.9) }
         }
 
-        @keyframes kiss {
+        @keyframes aKiss {
           0%   { transform: scale(.7) }
           50%  { transform: scale(.8) }
           80%  { transform: scale(1) rotate(-30deg) }
@@ -957,7 +972,7 @@ OM = _omsg
         &, button, input { font-family: var(--ui-font) }
 
         /// Toast notifications.
-        ._11dpe {
+        ._2-NDv {
             c: fg1
             border: 1px solid bg5 i
             button:nth-child(2) { c: ac1 }
@@ -965,7 +980,8 @@ OM = _omsg
         }
 
         /// Intro image.
-        [data-asset-intro-image-dark], [data-asset-intro-image-light] {
+        [data-asset-intro-image-dark],
+        [data-asset-intro-image-light] {
             max-width: 240px
             max-height: 240px
             background-image: var(--intro-image)
@@ -1003,7 +1019,7 @@ OM = _omsg
         }
 
         /// Settings -> Tweaks for 'Set Chat Wallpaper' area. #149
-        /._3lqL6 {
+        /._1wlMU {
             position: relative
 
             /// Override selected wallpaper.
@@ -1022,7 +1038,7 @@ OM = _omsg
 
             /// Expand default chat wallpaper.
             &:first-child {
-                border: 4px solid bg3 i
+                &:not(._2ILMM) { border: 4px solid bg2 i }
                 &, &::after { width: calc(3 * 82px + 30px) i }
                 span {
                     font-size: 0 i
@@ -1037,21 +1053,25 @@ OM = _omsg
             /[style *= 'rgb(222\, 227\, 233)'],
             /[style *= 'rgb(217\, 218\, 222)'],
             /[style *= 'rgb(192\, 193\, 196)'] {
-                border: 4px solid bg3 i
-                c: 0 0 bg1
+                c: 0 0 bg2
             }
         }
 
         /// Global -> Scrollbar styles.
-        /\*{
+        /\* {
             /// Scrollbar colors.
             @supports (scrollbar-width: thin) {
                 scrollbar-color: ac2 var(--shadow) i
             }
             &::-webkit-scrollbar {
-                &-thumb { c: 0 0 ac2 i }
-                &-track { c: 0 0 var(--shadow) i }
+                &-thumb { c: 0 0 ac2 }
+                &-track { c: 0 0 var(--shadow) }
             }
+        }
+
+        /// Feat -> Hide profile pictures.
+        if (chat_h_p_p) {
+            /img[src*='whatsapp.com/pp?'] { display: none i }
         }
 
         /// Loading page.
@@ -1073,20 +1093,22 @@ OM = _omsg
     }
 
     // Feat -> Rounded corners for avatars.
-    ._1BjNO[style] {
+    ._1l12d[style] {
         /// Global/shared contacts.
-        &, /._1S7ke { c: 0 0 bg5 }
+        &, /._3PdFH { c: 0 0 bg5 }
 
         /// Avatars/images/new group/shared contacts/contact avatar.
-        &, > img, /._18cLH, /._3_Hvt, /._2H1bg, /._1S7ke, /._2SNSv {
+        &, > img, /._3I3b7, /._3PdFH, /._1huBh, /._3JaPz {
             rad: var(--r-avatars) i
         }
 
         /// Add rounded corners to the default group SVG avatar.
-        /.Ao0On { c: 0 0 bg5 }
+        /._3JaPz { c: 0 0 bg5 }
 
-        /// Fix 'new group' bottom divider to hide drawer background-color.
-        /._1g1ui > ._1ByLM { margin-left: unset i }
+        /// Fix 'New group' bottom divider to hide drawer background-color.
+        /[data-list-scroll-offset] > div:first-child > div:last-child {
+            margin-left: 0 i
+        }
 
         /// Tweak default-user icons.
         if (radius_a != '50%') {
@@ -1122,29 +1144,38 @@ OM = _omsg
     // Modals.
     .overlay {
         /// Media/Avatar viewers have different headers. @upstream
-        ._2ouPw, ._21ltg, > .KeLEe {
-            border-bottom: 1px solid bg5 i
-            c: 0 0 bg3
+        /[data-animate-media-viewer] {
+            > div:first-child, ../ ._2CDVd {
+                border-bottom: 1px solid bg5 i
+                c: 0 0 bg2
+            }
 
             /// Fix header onflicts.
-            ../ ._1kEVs { c: 0 0 t }
+            ../ ._3Pwfx._2jw57 { c: 0 0 t }
         }
 
         /// Add borders.
         [data-animate-modal-popup] {
+            box-shadow: var(--bshadow) i
             border: 1px solid bg5
             rad: var(--r-menus) i
 
             .copyable-area {
                 > header { border-bottom: 1px solid bg5 }
-                > span [style *= 'translateY'], ._30pU5 {
+                > span [style *= 'translateY']:not([tabindex]), ._30pU5 {
                     border-top: 1px solid bg5
                 }
             }
         }
 
+        /// Groups -> Search participants.
+        header + div[tabindex] + div div[style] {
+            --background-default: bg1
+            --background-default-hover: bg2
+        }
+
         /// Fix media selection.
-        /._1KWct { c: 0 bg5 bg3 }
+        /._17JJa { c: 0 bg5 bg2 }
 
         /// Status area modal.
         /[data-animate-status-v3-modal-background = 'true'] {
@@ -1185,7 +1216,7 @@ OM = _omsg
         }
 
         /// 'Allow notifications' modal.
-        &._3Os9f {
+        &._2s66d._3QE0O {
             c: 0 0 var(--modal-backdrop)
             [data-animate-modal-popup] {
                 padding: 16px i
@@ -1233,7 +1264,7 @@ OM = _omsg
 
         &-main {
             a[href] { c: ac0 }
-            label, ._2yUXW { c: fg3 }
+            label, ._38sqg { c: fg3 }
             .landing-title { c: fg1 }
             rect[fill ^= '#f2f'], rect[fill ^= '#F2F'] { fill: bg5 }
             path[fill ^= '#818'] { fill: ac0 }
@@ -1247,14 +1278,14 @@ OM = _omsg
                 [role='button'] { c: white 0 ac0 }
 
                 /// Change white border when inactive.
-                &._2BIlf {
+                &.UlvkP {
                     outline: 4px solid ac0
                     box-shadow: 0 0 0 4px ac0
                 }
             }
 
             /// Video tutorial.
-            + ._3pdvT {
+            + ._3bA0V {
                 c: 0 0 t
                 img { opacity: 0.3 }
                 /// Reset background on button container.
@@ -1262,7 +1293,7 @@ OM = _omsg
             }
 
             /// 'Keep me signed in' tooltip. #59
-            ._3ybl8 {
+            ._1jxi5 {
                 c: white 0 ac0
                 box-shadow: bsh
                 &::before { border-bottom-color: ac0 i }
@@ -1300,23 +1331,25 @@ OM = _omsg
 
         /// Right -> Remove top border from the first Links/Docs message.
         /div, /span {
-            div:first-child > .aGjYp::before { content: none }
+            div:first-child > .U7SeD::before { content: none }
         }
 
         /// Feat -> Input border radius.
-        ._3xpD_ { rad: var(--r-inputs) i }
+        ._2Evw0 { rad: var(--r-inputs) i }
 
         /// Dropdowns -> Chat/Header.
-        > span > div, ._2s_eZ {
+        > span > div, ._3nLE_ {
             &[style ^= 'transform-origin:'][tabindex] {
+                box-shadow: var(--bshadow) i
                 border: 1px solid bg4
                 rad: var(--r-menus) i
             }
         }
 
         /// Floating emoji picker.
-        > span > ._3f317 {
+        > span > ._3nLE_ {
             border: 1px solid bg5 i
+            box-shadow: var(--bshadow) i
 
             > [data-animate-dropdown-nib] {
                 border-bottom: 1px solid bg5
@@ -1354,9 +1387,12 @@ OM = _omsg
         &::after { content: unset i }
 
         /// Search.
-        .gQzdc, ._3qx7_ {
+        /._22PcK {
+            c: 0 0 bg2
             border-bottom: 1px solid bg5 i
+            label { box-shadow: inset 0 0 0 1px bg4 }
             &::after { display: none i }
+            &._30SFc { box-shadow: var(--bshadow) }
 
             /// Remove animation.
             /._1yO24 { animation: none i }
@@ -1374,12 +1410,10 @@ OM = _omsg
 
                     /// Feat -> Alerts.
                     if (app_alerts == 'hide') {
-                        & > div { display: none i }
+                        > div { display: none i }
                     } else if (app_alerts == 'notifications') {
-                        & > div {
-                            border-bottom: 1px solid bg5 i
-                            &._1evad { display: none i }
-                        }
+                        > div { border-bottom: 1px solid bg5 i }
+                        > div._1oIRX { display: none i }
                     } else {
                         border-bottom: 1px solid bg5 i
                     }
@@ -1388,22 +1422,62 @@ OM = _omsg
         }
 
         /// Right -> Drawer divider.
-        ._14VS3 > ._1V8rX {
+        &.three > div:nth-child(2) > div:nth-child(3) {
             border-left: 1px solid bg5 i
 
-            /// Drawer header.
-            if (app_header) {
-                .copyable-area > header {
-                    border-bottom: 1px solid bg5 i
-                }
-            }
-
             /// Remove shadows from drawer sections.
-            /._2Bps4 { box-shadow: 0 0 0 1px bg4 i }
+            /._32vnm { box-shadow: 0 0 0 1px bg4 i }
 
             /// Remove native dark mode dividers.
             /.dark .three {
-                ._2vJ01, ._2-aNW { border-right: none i }
+                #main > *, ._26MUt { border-right: none i }
+            }
+        }
+
+        /// Floating drawers.
+        > div:nth-child(2) {
+            /// Left -> Archived contacts.
+            > div:nth-child(1) {
+                > span[class] * {
+                    // c: 0 0 red
+                    [role][aria-selected='false'] > div {
+                        c: 0 0 bg1
+                        &:hover { c: 0 0 bg2 }
+                    }
+                }
+            }
+
+            /// Left -> Settings -> Help.
+            > div:nth-child(1) {
+                .copyable-text ~ div[role='button'] {
+                    --background-default: var(--bg-1)
+                    --background-default-hover: var(--bg-2)
+                }
+            }
+
+            /// Left/Right -> Starred messages.
+            > div:nth-child(1),
+            > div:nth-child(3) {
+                // c: 0 0 blue
+                header + div > span > div > div {
+                    --drawer-gallery-background-hover: var(--bg-2)
+                    --border-panel: b11
+                    /// Always show top border.
+                    &::before { c: 0 0 bg3 }
+                    /// Do not hide bottom border.
+                    &::after { c: 0 0 t }
+                }
+            }
+
+            /// Right -> Invite to group.
+            > div:nth-child(3) {
+                header + div {
+                    > div:first-child.wJ21F, // Invite link wrapper.
+                    > div[role='button'] {
+                        --background-default: bg1
+                        --background-default-hover: bg2
+                    }
+                }
             }
         }
     }
@@ -1420,7 +1494,7 @@ OM = _omsg
         &[data-icon] path[fill = '#FFBC00'] { fill: bg3 i }
 
         /// Chat -> Context menu arrows.
-        &[data-icon = 'down-context'] { c: fg0 }
+        &[data-icon = 'down-context'] { c: fg3 }
 
         /// Hover animation for icons.
         /#side > header,
@@ -1437,24 +1511,24 @@ OM = _omsg
     }
 
     // Feat -> Consistent drawer headers.
-    if (app_header) {
-        ._1fiOp, ._2TZYF {
+    .copyable-area header[class] {
+        if (app_header) {
             height: 59px i
             justify-content: center i
             border-bottom: 1px solid bg5 i
 
             /// Reset left drawer inner item.
-            > [data-animate-drawer-title] { height: unset i }
+            > [data-animate-drawer-title] {
+                height: unset i
 
-            /// Reset header text.
-            ._3vTfY {
-                margin-top: 1px i
-                font-size: 18px i
-                font-weight: normal i
+                /// Reset header text.
+                > div:nth-child(2) {
+                    margin-top: 1px i
+                    font-size: 18px i
+                    font-weight: normal i
+                }
             }
-        }
-    } else {
-        ._1fiOp, ._2TZYF {
+        } else {
             --panel-background-colored: bg4 i
         }
     }
@@ -1474,7 +1548,7 @@ OM = _omsg
                     overflow: hidden i
                     > div { transition: background, filter 300ms ease-in-out i }
                     &:not(:hover) > div { filter: blur(6px) }
-                    &._1f1zm, &:hover { filter: blur(0px) }
+                    &:hover { filter: blur(0px) }
                 }
             }
         }
@@ -1485,32 +1559,31 @@ OM = _omsg
         /// Reset header.
         > header {
             border-bottom: 1px solid bg5 i
-            border-right: none i
+            box-shadow: none i
             c: 0 bg5
 
-            /// Hide borders.
-            &::after { content: unset i }
+            /// Remove border in light mode.
+            &::after { content: unset }
         }
 
         /// System messages.
-        ._1E1g0 {
+        .KpuSa {
             border: 1px solid b63
-
-            /// Tweak text shadow.
-            text-shadow: 0 1px 0 to_rgba('fg-1', 0.3)
+            text-shadow: none i
 
             /// End-to-end encryption message.
-            &._2n04H { border: 1px solid b34 }
+            &._1N_HH { border: 1px solid b34 }
 
             /// Bussiness account message.
-            &._2nH_- { border: 1px solid to_rgba('notification-biz-text', 0.3) }
+            &._1C8gB { border: 1px solid b54 }
         }
 
-        /// Loading previous messages.
-        ._2J60S { border: 1px solid bg5 }
+        /// Loading previous messages / Jump to new messages.
+        ._3bfj9, ._3DmTD { border: 1px solid bg5 }
 
         /// Feat -> Custom chat background.
-        /[data-asset-chat-background-dark], /[data-asset-chat-background-light] {
+        /[data-asset-chat-background-dark],
+        /[data-asset-chat-background-light] {
             filter: invert(var(--chat-bg-i)) opacity(var(--chat-bg-o))
             background-image: var(--chat-image) i
             background-position: var(--chat-bg-p) i
@@ -1522,27 +1595,24 @@ OM = _omsg
             if (!chat_bg) { display: none i }
         }
 
-        /// Tweak text shadow.
-        ._1E1g0 { text-shadow: 0 1px 0 to_rgba('fg-3', 0.2) }
-
         /// Tweak 'unread messages' alert.
-        ._9WQEN { border: none i }
+        .XFAMv { border: none i }
 
         /// Tweak box-shadow for message bubbles.
         [class *= 'message-'][data-id] {
             /// Exclude stickers.
-            > span + div:not(.urabC) > div {
-                box-shadow: 0 1px 0 to_rgba('shadow', 0.33) i
+            > span + div:not(._31W3v) > div {
+                box-shadow: 0 1px 0 to_rgba('shadow', 0.2) i
             }
         }
 
         /// Fix context menu background for stickers.
-        .-AOZp ._2oA-- + div[style] { c: 0 0 bg4 }
+        ._1qGcR + div[style] { c: 0 0 bg4 }
 
         /// Add background to media message timestamps.
         /[style *= 'width'][style *= 'height'] + div {
-            /// Images.
-            &._3yTyY, &._2CHFo {
+            /// Images/gifs.
+            &._1yXJw, &._2QpTA {
                 padding: 2px 4px i
                 background-color: to_rgba('bg-1', 0.7) i
                 rad: (tail_style == 'fb-like') ? 16px i : 5px i
@@ -1551,14 +1621,14 @@ OM = _omsg
             /// Videos.
             /.video-thumb {
                 /// Length/Timestamp.
-                .len7M, + ._2DfqO {
+                ._1rd4q, + ._3phU6 {
                     padding: 2px 4px i
                     background-color: to_rgba('bg-1', 0.7) i
                     rad: (tail_style == 'fb-like') ? 16px i : 5px i
                 }
 
                 /// Timestamps in grouped media.
-                &._3EMsd + ._2DfqO {
+                &._3V2jl + ._3phU6 {
                     right: 5px i
                     bottom: 3px i
                 }
@@ -1573,14 +1643,14 @@ OM = _omsg
                 }
 
                 /// Live location overlay.
-                /.a221_ { background-color: to_rgba('bg-4', 0.5) i }
+                /.fMR4l { background-color: to_rgba('bg-4', 0.5) i }
             }
         }
 
         /// Feat -> Blur media.
         if (chat_b_img) {
             /[class *= 'message-'] [style *= 'height'] {
-                img {
+                img:not([src*='/pp?']) {
                     transition: 0.5s ease
                     transition-delay: var(--blur-out)
                     filter: blur(16px) grayscale(100%)
@@ -1623,11 +1693,14 @@ OM = _omsg
                 box-shadow: 0 -1px 0 bg5 i
             }
 
-            /// Remove double-border from an unknown contact.
-            ._2k-2Z { border-top: none }
+            /// Fix borders an unknown contact.
+            ._1Q5Gk {
+                border-top: none
+                border-bottom: 1px solid bg5
+            }
 
             /// Groups -> Only admins can send messages.
-            ._3ge3i {
+            ._2K2iM {
                 border-top: 1px solid bg5 i
                 border-left: @border-top
             }
@@ -1639,16 +1712,13 @@ OM = _omsg
             }
 
             /// Chat -> Select messages.
-            + span > ._2pAWd {
+            + span > .yVipa {
                 border-top: 1px solid bg5 i
                 border-left: 1px solid bg5 i
             }
 
-            /// Emoji group selection.
-            ._3eShu { border-bottom: 1px solid bg5 i }
-
             /// Feat -> Input border radius.
-            ._3uMse { rad: var(--r-inputs) i }
+            .DuUXI { rad: var(--r-inputs) i }
         }
 
         /// Fix styles for Google Maps.
@@ -1657,7 +1727,7 @@ OM = _omsg
         }
 
         /// Fix unread messages in dark mode. @upstream
-        /.dark ._8Uqu5 ._3dtfX .m61XR { c: var(--secondary-stronger) }
+        /.dark .vwouH ._1c_mC ._2gsiG { c: var(--secondary-stronger) }
 
         /// Groups -> Fix opacity for nicknames.
         /[class *= ' color-'] > span:nth-child(2) { c: fg3 }
@@ -1675,7 +1745,7 @@ OM = _omsg
     if (compact) {
         /// Reset height/width if there is an overflow.
         #app > div > [tabindex] {
-            @media screen and (max-height: 500px) { min-height: auto }
+            @media screen and (max-height: 648px) { min-height: auto }
             @media screen and (max-width: 648px) { min-width: auto }
             // > div *:hover { box-shadow: inset 0 0 0 1px crimson i }
         }
@@ -1747,10 +1817,13 @@ OM = _omsg
             }
 
             /// Fix search bar width.
-            ._3qx7_:not(._3fVV4) label { padding: 0px }
+            ._22PcK:not(._30SFc) label { padding: 0px }
 
             /// Contacts.
             #side {
+                status = '._-68As'
+                unread = '.VOr2j'
+
                 /// Fix header width.
                 > header {
                     min-width: 240px
@@ -1760,47 +1833,51 @@ OM = _omsg
                 }
 
                 /// Items.
-                .eJ0yJ {
-                    /// Add whitespace to hide message content.
-                    > div:last-child { padding-left: 5px i }
+                ._1C6Zl {
+                    /// Remove whitespace from icons.
+                    ._2Q3SY { margin: 0 i }
 
                     /// Reverse message content.
-                    ._1582E {
+                    ._7W_3c {
                         position: relative
                         flex-direction: row-reverse i
 
                         /// Remove margin from status wrapper.
-                        .m61XR {
+                        ._2gsiG {
                             z-index: 999 i
                             margin-left: 0 i
-                            position: absolute
-                            left: -41px
-                            bottom: -6px
+                            position: fixed
+                            left: 39px
+                            bottom: 6px
                             rad: 50%
-                            ._15G96 { margin: 0 }
 
                             /// Fix RTL layout.
                             /[dir = 'RTL'] & {
                                 left: unset i
-                                right: -77px i
+                                right: 36px i
                             }
 
                             /// Unread indicator.
-                            ._31gEB { border: 4px solid bg2 }
+                            { unread } {
+                                border: 4px solid bg2
+                                left: 20px i
+                            }
                         }
 
                         /// Reverse message and icons.
-                        .m61XR > span {
+                        ._2gsiG > span {
                             display: flex i
                             flex-direction: row-reverse i
                         }
 
-                        /// Remove chevron and all status icons.
-                        ._38QnI, .ZKn2B > *:not(._31gEB) { display: none }
+                        /// Remove chevron, pinned, and all status icons.
+                        .tRtcW, ._2SPs9, [data-icon]:not([data-icon*='status-']) {
+                            display: none
+                        }
                     }
 
                     /// 'Typing...' status indicator.
-                    /._616fG {
+                    /._2NMQ2 {
                         overflow: unset i
                         margin-top: -8px i
                         margin-left: 0px i
@@ -1811,30 +1888,33 @@ OM = _omsg
                             z-index: 1 i
                             position: absolute i
                             top: -31px i
-                            left: -71px i
+                            left: -66px i
                             height: 53px i
                             width: 53px i
                             rad: var(--r-avatars) i
                             box-shadow: inset 0 0 0 3px b40 i
-                            animation: 2s pulse infinite i
+                            animation: 2s aBorder infinite i
 
                             /// Fix RTL layout.
-                            /[dir = 'RTL'] & { left: 62px i }
+                            /[dir = 'RTL'] & { left: 63px i }
                         }
                     }
 
                     /// Message status.
-                    .zFnXi {
+                    { status } {
                         padding: 1.5px
                         z-index: 101
-                        position: absolute
-                        margin: -2px 0 0 -75px
-                        border: 3px solid bg2
+                        position: fixed
+                        left: 38px
+                        border: 4px solid bg2
                         c: 0 0 bg1
                         rad: 50%
 
                         /// Fix RTL layout.
-                        /[dir = 'RTL'] & { margin-right: -35px i }
+                        /[dir = 'RTL'] & {
+                            left: unset i
+                            right: 42px i
+                        }
 
                         /// Make SVG smaller.
                         > span > svg {
@@ -1843,10 +1923,14 @@ OM = _omsg
                             width: 14px i
                         }
                     }
+                }
 
-                    /// Active states.
-                    &._13opk { ._31gEB, .zFnXi { c: 0 bg4 }}
-                    &:hover:not(._13opk) { ._31gEB, .zFnXi { c: 0 bg3 }}
+                /// Hover/Active states.
+                [aria-selected='false'] > div:hover {
+                    { unread }, { status } { c: 0 bg3 }
+                }
+                [aria-selected='true'] > div {
+                    { unread }, { status } { c: 0 bg4 }
                 }
 
                 /// I _think_ I understand why this works!
@@ -1859,16 +1943,15 @@ OM = _omsg
     .message {
         /// 1, 2:    External video/link
         /// 3, 4, 5: Reply, Gif, Document
-        /// 6, 7:    Grouped image/video
+        /// 6, 7:    (Grouped) images/videos
         /// 8:       Google Maps
-        md = '._1t3gq, .SjSeX, ._2iML2, ._15rLL, ._3_4_I, .Yik3W, .va0ao, ._3B7f_'
+        md = '._1d7uX, ._3JHdl, .i8New, .QnPmY, ._20adz, ._1mTER, .-xSc5, ._1VzZY'
         /// 1:   Messages
-        /// 2:   Videos
+        /// 2:   Video timestamp/length
         /// 3-5: Images/gifs/stickers
-        ts = '.VGBA3, .video-thumb + ._2DfqO, ._3yTyY, ._2CHFo, ._1nrJA'
+        ts = '._1nOME, .video-thumb + ._3phU6, ._1rd4q, ._1yXJw, ._2QpTA, ._2zab4'
         /// Big emojis.
-        big = '._20sYJ'
-
+        big = '._3B8qp'
 
         /// Feat -> Message tails.
         if (tail_style == 'fb-like') {
@@ -1903,10 +1986,11 @@ OM = _omsg
             }
 
             /// Helpers.
-            bubble  = '._28DtS'
-            system  = '._2qhWD, ._9WQEN'
-            sticker = '._3ToB1'
-            forward = '._29g--'
+            bubble  = '._2rBI0'
+            system  = '._3ASsl, .XFAMv'
+            sticker = '._2JswF'
+            forward = '._1ubAk'
+            context = '._2_CMk'
 
             /// Shared styles.
             &-in, &-out {
@@ -1923,20 +2007,20 @@ OM = _omsg
                 /// Fix rounded corners for forward button.
                 &:not(#z) { forward }:not(#z) { rad: _o i }
 
-                /// Fix rounded corners for videos/images in grouped media.
-                &:not(#z) ._269XL._3sKvP.wQZ0F { .va0ao, .Yik3W { rad: _o i }}
+                /// Fix rounded corners for images/videos in grouped media.
+                &:not(#z) ._3dejV._2XJpe._7M8i6 { ._1mTER, .-xSc5 { rad: _o i }}
 
                 /// Fix rounded corners for alerts in Google Maps messages.
                 /// NOTE: Hard-coded; adding more logic for this makes no sense.
-                .YQVY1 { rad: _o _o 0 0 i }
-                ._4Dkba { rad: 0 0 _o _o i }
+                .SpdXA { rad: _o _o 0 0 i }
+                .fMR4l { rad: 0 0 _o _o i }
 
                 /// Increase padding-right for bubbles.
-                &:not(.serpP) ._274yw {
+                &:not(._2FNAC) ._1dB-m {
                     padding-right: 9px i
 
                     /// Fix margin for replies.
-                    ._3AFCK { margin-right: -6px }
+                    ._3fs13 { margin-right: -6px }
                 }
 
                 /// Rounded timestamps.
@@ -1945,14 +2029,12 @@ OM = _omsg
 
             /// Incoming messages.
             &-in {
-                ._1ohds { border-top-right-radius: _m i }
+                { context } { border-top-right-radius: _m i }
                 /// First message -> In/Out/System messages.
                 &, ../-out, /{ system } {
                     &:not({ bubble }) + .message-in{ bubble } {
                         // c: 0 0 #ff55550a
                         > div > div, { md }, { sticker } { rad: left_top }
-                        /// Media context menu.
-                        ._20EE3 { rad: 0 _m 0 0 i }
                     }
                 }
                 /// Messages in between.
@@ -1960,6 +2042,7 @@ OM = _omsg
                     // c: 0 0 #55ff550a
                     { md } { rad: left_med }
                     > div > div, { sticker } { rad: left_mid }
+                    { context } { border-top-right-radius: _i i }
                 }
                 /// Last message.
                 &{ bubble } + .message-in:not({ bubble }) {
@@ -1973,14 +2056,12 @@ OM = _omsg
 
             /// Outgoing messages.
             &-out {
-                ._1ohds { border-top-right-radius: _o i }
+                { context } { border-top-right-radius: _o i }
                 /// First message -> In/Out/System messages.
                 &, ../-in, /{ system } {
                     &:not({ bubble }) + .message-out{ bubble } {
                         // c: 0 0 #ff55551a
                         > div > div, { md } { rad: right_top }
-                        /// Media context menu.
-                        ._20EE3 { rad: 0 _m 0 0 i }
                     }
                 }
                 /// Messages in between.
@@ -1988,13 +2069,13 @@ OM = _omsg
                     // c: 0 0 #55ff551a
                     { md } { rad: right_med }
                     > div > div { rad: right_mid }
-                    /// Context menu.
-                    ._1ohds { border-top-right-radius: _i i }
+                    { context } { border-top-right-radius: _i i }
                 }
                 /// Last message.
                 &{ bubble } + .message-out:not({ bubble }) {
                     // c: 0 0 #5555ff1a
                     > div > div, { md } { rad: right_end }
+                    { context } { border-top-right-radius: _i i }
                 }
 
                 /// Feat -> Outgoing message bubble position.
@@ -2020,7 +2101,7 @@ OM = _omsg
                 /// Some links have TWO empty headers.
                 a.selectable-text[href],
                 /// Embedded links are special snowflakes, too.
-                .eRacY[dir = 'ltr'] > [dir = 'ltr'] {
+                ._1VzZY[dir = 'ltr'] > [dir = 'ltr'] {
                     &::before, &::after { content: unset i }
                 }
             }
@@ -2042,7 +2123,7 @@ OM = _omsg
                 /// Apparently messages with images/videos are treated like
                 /// special snowflakes, so this resets their timestamps.
                 [style *= 'width'], .video-thumb {
-                    + div > .eRacY[dir = 'rtl'] { padding-bottom: 0.8rem i }
+                    + div > ._1VzZY[dir = 'rtl'] { padding-bottom: 0.8rem i }
                 }
                 /// Remove whitespace for links.
                 .message-text-link::after { content: unset i }
@@ -2051,8 +2132,8 @@ OM = _omsg
 
         /// Feat -> Collapse messages for `fb-like` tail style.
         if (fb_compact && tail_style == 'fb-like') {
-            rtl = '.eRacY[dir = "rtl"]'
-            ltr = '._2oWZe'
+            rtl = '._1wlJG[dir = "rtl"]'
+            ltr = '._3ysB9'
 
             &-in, &-out {
                 /// LTR whitespace.
@@ -2067,8 +2148,8 @@ OM = _omsg
                     padding-bottom: 0.8rem i
                 }
 
-                /// Hide timemstamps.
-                &._28DtS {
+                /// Hide timestamps.
+                &{ bubble } {
                     // c: 0 0 #ff555508
                     { rtl }, { ltr }, { big } { transition: padding 0.2s ease i }
                     { ts } { transition: opacity 0.2s ease i }
@@ -2121,15 +2202,19 @@ OM = _omsg
                     padding-top: 2px i
                     z-index: 0 i
 
-                    /// Add whitespace to avoid timestmap collision.
-                    if (tail_style != 'fb-like') {
+                    /// Add whitespace to avoid timestamp collision.
+                    if (tail_style = 'fb-like') {
                         padding-bottom: 0.8rem i
                     }
 
                     /// Reset emojis.
                     span {
                         margin: 0 i
-                        > img { width: size i; height: @width }
+                        /// All emojis / Heart emoji.
+                        > img, ../ div > img {
+                            width: size i
+                            height: size i
+                        }
                     }
                 }
             } else {
@@ -2138,21 +2223,24 @@ OM = _omsg
 
             /// Increase minimum width for message bubbles.
             > div:nth-child(2) { min-width: 56px }
+        }
 
-            /// Feat -> Animate emojis.
-            if (emoji_ani) {
-                img[src $= '-64.png'] {
-                    /// 🤩, 😍, ☺️,❣️, ♥️, ❤️
-                    &[alt = '🤩'],
-                    &[alt = '😍'],
-                    &[alt = '☺️'],
-                    &[alt = '❣️'],
-                    &[alt = '♥️'],
-                    &[alt = '❤️'] {
-                        animation: heartPulse 1s infinite
+        /// Feat -> Animate emojis.
+        if (emoji_a) {
+            emoji_k = (emoji_k == '') ? () : emoji_k
+            emoji_p = (emoji_p == '') ? () : emoji_p
+
+            /// Generate Kiss/Pulse emoji styles.
+            /[class*='message-'] img[src$='-64.png'] {
+                for emoji in emoji_k {
+                    &[alt={ '%s' % emoji }] {
+                        +cache('aKiss') { animation: aKiss 1.5s infinite }
                     }
-                    /// 💋
-                    &[alt = '💋'] { animation: kiss 1s infinite }
+                }
+                for emoji in emoji_p {
+                    &[alt={ '%s' % emoji }] {
+                        +cache('aPulse') { animation: aPulse 1.5s infinite }
+                    }
                 }
             }
         }
@@ -2175,10 +2263,6 @@ OM = _omsg
             }
         }
 
-        /// Map loading background.
-        /// NOTE: Made it transparent so it stops flashing.
-        /._3UG7w:not(#z) > div[style] { c: 0 0 t }
-
         /// Map controls.
         [controlwidth = '40'] * {
             filter: invert(0.9) i
@@ -2193,9 +2277,9 @@ OM = _omsg
         .BPkae { border-top-color: var(--modal-background) i }
 
         /// Location pin.
-        ._2T2Fj { c: 0 0 ac1 }
+        ._3Q8RX { c: 0 0 ac1 }
 
         /// Footer border.
-        /.VK7yK { box-shadow: 0 -1px bg5 i }
+        /._3nNEI { box-shadow: 0 -1px bg3 i }
     }
 }
